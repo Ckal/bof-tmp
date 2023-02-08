@@ -1,0 +1,39 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      function getMobileOS() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        // Windows Phone must come first because its UA also contains "Android"
+        if (/windows phone/i.test(userAgent)) {
+          return "Windows Phone";
+        }
+
+        // Android detection 
+        if (/Android/i.test(userAgent)) {
+          return "Android";
+        }
+
+        // iOS detection 
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+          return "iOS";
+        }
+        return false;
+      }
+DetectAndRedirect();
+      function DetectAndRedirect() {
+        if (getMobileOS() == "Android") {
+          window.location.href = "https://play.google.com/store/apps/details?id=com.bofrost&gl=DE";
+        }
+        if (getMobileOS() == "iOS") {
+          window.location.href = "https://apps.apple.com/de/app/bofrost/id1601253041";
+        }
+      
+      };
+    </script>
+  </head>
+  <body onload="DetectAndRedirect()">
+  
+    <div id="not-mobile"></div>
+  </body>
